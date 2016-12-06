@@ -91,6 +91,7 @@ public class Person {
         
         // ajout du film
         movies.put(movie.getId(), movie);
+        movie.addPerson(this);
         
     }
     
@@ -107,7 +108,7 @@ public class Person {
      * si le film paramètré n'est pas dans la "liste de films vus"
      */
     public void removeMovie(Movie movie) throws NullParameterException, InvalidParameterException{
-        // vérification des données avant ajout
+        // vérification des données avant suppresion
         if (movie == null) {
             throw new NullParameterException();
         }
@@ -118,6 +119,7 @@ public class Person {
         
         // supression du film 
         movies.remove(movie.getId());
+        movie.removePerson(this);
     }
     
     

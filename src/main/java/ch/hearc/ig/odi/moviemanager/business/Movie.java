@@ -5,6 +5,9 @@
  */
 package ch.hearc.ig.odi.moviemanager.business;
 
+import ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException;
+import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
+import ch.hearc.ig.odi.moviemanager.exception.UniqueException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,5 +65,60 @@ public class Movie {
     
     public ArrayList<Map.Entry<Long, Person>> getPeople() {
         return new ArrayList<>(people.entrySet());
+    }
+    
+    /**
+     * méthode paramétré pour la classe Movie. 
+     * Ajoute une personne à la "liste des personnes" ayant vu ce film
+     *
+     * @param person La personne à ajouter à la "liste des personnes" ayant
+     * vu ce film
+     * @throws ch.hearc.ig.odi.moviemanager.exception.NullParameterException
+     * si la valeur du paramètre person est null
+     * @throws ch.hearc.ig.odi.moviemanager.exception.UniqueException
+     * si la perosnne à ajouter existe déjà dans la liste des personnae ayant
+     * déjà vu ce film
+     */
+    public void addPerson(Person person) throws NullParameterException, UniqueException{
+        
+        // vérification des données avant ajout
+        if (person == null) {
+            throw new NullParameterException();
+        }
+        
+        if (people.containsValue(person)) {
+            throw new UniqueException();
+        }
+        
+        // ajout de la personne
+        people.put(person.getId(), person);
+        
+    }
+    
+    /**
+     * méthode paramétré pour la classe Movie. 
+     * Supprime la personne placée en paramètre de "liste des personnes" ayant
+     * vu ce film
+     *
+     * @param person La personne à supprimée de la "Liste des personnes" ayant
+     * vu ce film
+     * @throws ch.hearc.ig.odi.moviemanager.exception.NullParameterException
+     * si la valeur du paramètre person est null
+     * @throws ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException
+     * si la perosnne à supprimer n'existe pas dans la liste des personnae ayant
+     * déjà vu ce film
+     */
+    public void removePerson(Person person) throws NullParameterException, InvalidParameterException{
+        // vérification des données avant supppression
+        if (person == null) {
+            throw new NullParameterException();
+        }
+        
+        if (!people.containsValue(person)) {
+            throw new InvalidParameterException();
+        }
+        
+        // supression de la personne 
+        people.remove(person.getId());
     }
 }
