@@ -1,4 +1,4 @@
-package ch.hearc.ig.moviemanager.services;
+package ch.hearc.ig.odi.moviemanager.services;
 
 import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
