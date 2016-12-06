@@ -5,6 +5,9 @@
  */
 package ch.hearc.ig.odi.moviemanager.business;
 
+import ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException;
+import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
+import ch.hearc.ig.odi.moviemanager.exception.UniqueException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,11 +73,25 @@ public class Person {
      *
      * @param movie Le film à ajouter à la "liste de films vus" par 
      * cette personne
+     * @throws ch.hearc.ig.odi.moviemanager.exception.NullParameterException
+     * si la valeur du paramètre movie est null
+     * @throws ch.hearc.ig.odi.moviemanager.exception.UniqueException
+     * si le film paramètré est déjà dans la "liste de films vus"
      */
-    public void addMovie(Movie movie){
-        /* 
-        TODO 
-        */
+    public void addMovie(Movie movie) throws NullParameterException, UniqueException{
+        
+        // vérification des données avant ajout
+        if (movie == null) {
+            throw new NullParameterException();
+        }
+        
+        if (movies.containsValue(movie)) {
+            throw new UniqueException();
+        }
+        
+        // ajout du film
+        movies.put(movie.getId(), movie);
+        
     }
     
     /**
@@ -84,12 +101,25 @@ public class Person {
      *
      * @param movie Le film à supprimer à la "liste de films vus" 
      * par cette personne
+     * @throws ch.hearc.ig.odi.moviemanager.exception.NullParameterException
+     * si la valeur du paramètre movie est null
+     * @throws ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException
+     * si le film paramètré n'est pas dans la "liste de films vus"
      */
-    public void removeMovie(Movie movie){
-        /* 
-        TODO 
-        */
+    public void removeMovie(Movie movie) throws NullParameterException, InvalidParameterException{
+        // vérification des données avant ajout
+        if (movie == null) {
+            throw new NullParameterException();
+        }
+        
+        if (!movies.containsValue(movie)) {
+            throw new InvalidParameterException();
+        }
+        
+        // supression du film 
+        movies.remove(movie.getId());
     }
+    
     
     
 }
