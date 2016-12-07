@@ -19,21 +19,35 @@ and open the template in the editor.
     
     <h:body>
         <h1>#{msgs['movieManagerTitle']}</h1>
+        <h2>#{msgs['peopleList']}</h2>
         <h:dataTable value="#{personBean.people}" var="person">
             <h:column>
-                <f:facet name="header">ID</f:facet>
+                <f:facet name="header">#{msgs['personId']}</f:facet>
                 #{person.id.toString()}
             </h:column>            
             <h:column>
-                <f:facet name="header">First name</f:facet>
+                <f:facet name="header">#{msgs['personFirstName']}</f:facet>
                     #{person.firstName}
             </h:column>
             <h:column>
-                <f:facet name="header">Last name</f:facet>
+                <f:facet name="header">#{msgs['personLastName']}</f:facet>
                     #{person.lastName}
             </h:column>
-
-
+        </h:dataTable>
+        
+        <h:dataTable value="#{personBean.movies}" var="movie">
+            <h:column>
+                <f:facet name="header">#{msgs['movieId']}</f:facet>
+                #{movie.id.toString()}
+            </h:column>            
+            <h:column>
+                <f:facet name="header">#{msgs['movieName']}</f:facet>
+                    #{movie.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">#{msgs['movieProducer']}</f:facet>
+                    #{movie.producer}
+            </h:column>
         </h:dataTable>
     </h:body>
 </html>

@@ -5,6 +5,7 @@
  */
 package ch.hearc.ig.odi.moviemanager.presentation.bean;
 
+import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
 import ch.hearc.ig.odi.moviemanager.services.Services;
 import java.io.Serializable;
@@ -25,9 +26,12 @@ public class PersonBean implements Serializable{
     
     @Inject
     Services services;
+    
     List<Person> people;
     Person currentPerson;
     private long currentCustomerID;
+    
+    List<Movie> movies;
     
     
     
@@ -40,12 +44,17 @@ public class PersonBean implements Serializable{
     public List<Person> getPeople() {
         return people;
     }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
     
     /**
      * Initialise la liste de personne ayant vu un film
      */
     public void initList() {
         this.people = services.getPeopleList();
+        this.movies = services.getMoviesList();
     }
     
     
