@@ -37,6 +37,7 @@ public class Movie {
         this.id = id;
         this.name = name;
         this.producer = producer;
+        this.people = new HashMap<Long,Person>();
     }
 
     public Long getId() {
