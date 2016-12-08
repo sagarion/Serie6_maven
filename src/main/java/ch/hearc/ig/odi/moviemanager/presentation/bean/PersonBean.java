@@ -11,6 +11,7 @@ import ch.hearc.ig.odi.moviemanager.services.Services;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
 import javax.inject.Inject;
@@ -28,8 +29,8 @@ public class PersonBean implements Serializable{
     Services services;
     
     List<Person> people;
-    Person currentPerson;
-    private long currentCustomerID;
+    private Person currentPerson;
+    private long currentPersonID;
     
     List<Movie> movies;
     
@@ -48,6 +49,25 @@ public class PersonBean implements Serializable{
     public List<Movie> getMovies() {
         return movies;
     }
+
+    public long getCurrentPersonID() {
+        return currentPersonID;
+    }
+
+    public void setCurrentPersonID(long currentPersonID) {
+        this.currentPersonID = currentPersonID;
+    }
+
+    public Person getCurrentPerson() {
+        return currentPerson;
+    }
+
+    public void setCurrentPerson(Person currentPerson) {
+        this.currentPerson = currentPerson;
+    }
+    
+    
+    
     
     /**
      * Initialise la liste de personne ayant vu un film
@@ -57,7 +77,20 @@ public class PersonBean implements Serializable{
         this.movies = services.getMoviesList();
     }
     
-    
+    /**
+     * Récupère la personne correspondant au paramètre id de la requette
+     *
+     */
+    public void initPerson() {
+        String idParam = FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .getRequestParameterMap().get("id");
+        if (!(idParam == null || idParam.isEmpty())) {
+            currentPersonID = Integer.parseInt(idParam);
+            currentPerson = services.getPersonWithId(currentPersonID);
+        }
+    }
     
     
 }

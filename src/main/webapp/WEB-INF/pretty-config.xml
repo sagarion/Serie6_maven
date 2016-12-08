@@ -7,5 +7,9 @@
         <pattern value="/people/" />
         <view-id value="/faces/pages/people/list.xhtml" />
     </url-mapping>
+    <url-mapping>
+        <pattern value="/people/#{/[0-9]+/ id}" />
+        <view-id value="/faces/pages/people/edit.xhtml" />
+    </url-mapping>
 
 </pretty-config>
