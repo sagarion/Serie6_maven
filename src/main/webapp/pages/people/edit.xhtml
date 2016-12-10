@@ -7,8 +7,8 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
-          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <f:metadata>
         <f:viewParam name="id" value="#{personBean.currentPersonID}"/>
         <f:viewAction action="#{personBean.initPerson}"></f:viewAction>
@@ -17,12 +17,25 @@ and open the template in the editor.
         <h1>#{msgs['personDetails']}</h1>
         <h:form >
             <h:panelGrid columns="2">
-                <h:outputLabel value="#{msgs['personId']}" for="id"/>
-                <h:outputText id="id" value="#{personBean.currentPerson.id}"/>
-                <h:outputLabel value="#{msgs['personFirstName']}" for="firstName"/>
-                <h:inputText id="firstName" value="#{personBean.currentPerson.firstName}"/>
-                <h:outputLabel value="#{msgs['personLastName']}" for="lastName"/>
-                <h:inputText value="#{personBean.currentPerson.lastName}"/>
+                <h:panelGroup id="idOut">
+                    <h:panelGroup rendered="#{personBean.currentPersonID != -1}">
+                        <h:outputLabel value="#{msgs['personId']}" for="id"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup id="idIn">
+                    <h:panelGroup rendered="#{personBean.currentPersonID != -1}">
+                        <h:inputText readonly="true" disabled="true" value="#{personBean.currentPerson.id}"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                    <h:outputLabel value="#{msgs['personFirstName']}" for="firstName"/>
+                    <h:inputText id="firstName" value="#{personBean.currentPerson.firstName}"/>
+                    <h:outputLabel value="#{msgs['personLastName']}" for="lastName"/>
+                    <h:inputText value="#{personBean.currentPerson.lastName}"/>
+
+                    <h:commandButton id="reset" value="#{msgs['reset']}" type="reset" />
+                    <!--<h:commandButton id="submit" value="#{msgs['validate']}" action="" type="submit" />-->
+                    <h:button id="cancel" value="#{msgs['cancel']}" outcome="list.xhtml"/>  
+                    
             </h:panelGrid>
         </h:form>
     </h:body>

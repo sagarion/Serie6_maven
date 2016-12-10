@@ -23,7 +23,6 @@ and open the template in the editor.
         <h:dataTable value="#{personBean.people}" var="person">
             <h:column>
                 <f:facet name="header">#{msgs['personId']}</f:facet>
-                <f:facet name="header">ID</f:facet>
                 <h:link outcome="edit.xhtml" value="#{person.id.toString()}">
                     <f:param name="id" value="#{person.id.toString()}"/>
                 </h:link>
@@ -37,7 +36,9 @@ and open the template in the editor.
                     #{person.lastName}
             </h:column>
         </h:dataTable>
+        <h:button id="addPerson" value="Ajouter" outcome="edit.xhtml"/> 
         
+        <h2>#{msgs['moviesList']}</h2>
         <h:dataTable value="#{personBean.movies}" var="movie">
             <h:column>
                 <f:facet name="header">#{msgs['movieId']}</f:facet>
@@ -51,6 +52,6 @@ and open the template in the editor.
                 <f:facet name="header">#{msgs['movieProducer']}</f:facet>
                     #{movie.producer}
             </h:column>
-        </h:dataTable>
+        </h:dataTable> 
     </h:body>
 </html>

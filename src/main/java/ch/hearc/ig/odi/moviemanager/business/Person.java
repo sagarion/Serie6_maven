@@ -39,6 +39,17 @@ public class Person {
         movies = new HashMap();
     }
 
+    /**
+     * Constructeur vide pour la classe Person. Obligatoire. Représente
+     * un personne qui regarde des films, on initialise la collection qui
+     * contiendra les films vu par cette personne
+     *
+     */
+    public Person() {
+        movies = new HashMap();
+    }
+    
+
     public Long getId() {
         return id;
     }

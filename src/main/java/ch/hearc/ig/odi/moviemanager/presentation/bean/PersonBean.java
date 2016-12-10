@@ -89,6 +89,9 @@ public class PersonBean implements Serializable{
         if (!(idParam == null || idParam.isEmpty())) {
             currentPersonID = Integer.parseInt(idParam);
             currentPerson = services.getPersonWithId(currentPersonID);
+        }else {
+            currentPerson = new Person();
+            currentPersonID = -1;
         }
     }
     
