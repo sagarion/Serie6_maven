@@ -70,7 +70,8 @@ public class PersonBean implements Serializable{
     
     
     /**
-     * Initialise la liste de personne ayant vu un film
+     * Initialise la liste de personne enregistré
+     * Initialise la liste des films enregistré
      */
     public void initList() {
         this.people = services.getPeopleList();
@@ -78,7 +79,10 @@ public class PersonBean implements Serializable{
     }
     
     /**
-     * Récupère la personne correspondant au paramètre id de la requette
+     * Récupère la personne correspondant au paramètre id de la requette.
+     * Place la valeur -1 dans l'attribut currentPrsonID si en mode nouvelle
+     * personne.
+     * Charge les films lié à cette personne.
      *
      */
     public void initPerson() {
@@ -89,6 +93,7 @@ public class PersonBean implements Serializable{
         if (!(idParam == null || idParam.isEmpty())) {
             currentPersonID = Integer.parseInt(idParam);
             currentPerson = services.getPersonWithId(currentPersonID);
+            movies = currentPerson.getMovies();
         }else {
             currentPerson = new Person();
             currentPersonID = -1;

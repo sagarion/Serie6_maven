@@ -74,8 +74,8 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public ArrayList<Map.Entry<Long, Movie>> getMovies() {
-        return new ArrayList<>(movies.entrySet());
+    public ArrayList<Movie> getMovies() {
+        return new ArrayList(movies.values());
     }
     
     /**

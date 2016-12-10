@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>#{msgs['movieManagerTitle']}</title>
+    </h:head>
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{personBean.currentPersonID}"/>
+        <f:viewAction action="#{personBean.initPerson}"></f:viewAction>
+    </f:metadata>
+    <h:body>
+        <h1>#{msgs['movieManagerTitle']}</h1>
+
+        <h2>#{msgs['personDetails']}</h2>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{msgs['personId']}" for="id"/>
+                <h:outputText  value="#{personBean.currentPerson.id}"/>
+                <h:outputLabel value="#{msgs['personFirstName']}" for="firstName"/>
+                <h:outputText id="firstName" value="#{personBean.currentPerson.firstName}"/>
+                <h:outputLabel value="#{msgs['personLastName']}" for="lastName"/>
+                <h:outputText value="#{personBean.currentPerson.lastName}"/>          
+            </h:panelGrid>
+
+            <h:link outcome="info.xhtml" value="#{msgs['edit']}">
+                <f:param name="id" value="#{personBean.currentPerson.id.toString()}"/>
+            </h:link>
+            <h:button id="cancel" value="#{msgs['cancel']}" outcome="/pages/index.xhtml"/> 
+            
+        
+        <h2>#{msgs['moviesList']}</h2>
+        <h:dataTable value="#{personBean.movies}" var="movie" border="1">
+            <h:column>
+                <f:facet name="header">#{msgs['movieId']}</f:facet>
+                    #{movie.id.toString()}
+            </h:column>            
+            <h:column>
+                <f:facet name="header">#{msgs['movieName']}</f:facet>
+                    #{movie.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">#{msgs['movieProducer']}</f:facet>
+                    #{movie.producer}
+            </h:column>
+        </h:dataTable> 
+    </h:body>
+</html>

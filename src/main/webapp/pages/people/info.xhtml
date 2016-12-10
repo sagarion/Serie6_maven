@@ -9,12 +9,16 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <h:head>
+        <title>#{msgs['movieManagerTitle']}</title>
+    </h:head>
+    
     <f:metadata>
         <f:viewParam name="id" value="#{personBean.currentPersonID}"/>
         <f:viewAction action="#{personBean.initPerson}"></f:viewAction>
     </f:metadata>
     <h:body>
-        <h1>#{msgs['personDetails']}</h1>
+        <h1>#{msgs['personInfos']}</h1>
         <h:form >
             <h:panelGrid columns="2">
                 <h:panelGroup id="idOut">
@@ -34,7 +38,8 @@ and open the template in the editor.
 
                     <h:commandButton id="reset" value="#{msgs['reset']}" type="reset" />
                     <!--<h:commandButton id="submit" value="#{msgs['validate']}" action="" type="submit" />-->
-                    <h:button id="cancel" value="#{msgs['cancel']}" outcome="list.xhtml"/>  
+                    
+                    <h:button id="cancel" value="#{msgs['cancel']}" outcome="/pages/index.xhtml" />  
                     
             </h:panelGrid>
         </h:form>
