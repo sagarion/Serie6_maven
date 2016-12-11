@@ -9,6 +9,7 @@ import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
 import ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException;
 import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
+import ch.hearc.ig.odi.moviemanager.exception.UniqueException;
 import ch.hearc.ig.odi.moviemanager.services.Services;
 import java.io.Serializable;
 import java.util.List;
@@ -38,6 +39,7 @@ public class PersonBean implements Serializable {
     private long currentPersonID;
 
     List<Movie> movies;
+    Movie movieToAdd;
 
     /**
      * Creates a new instance of PersonBean
@@ -68,6 +70,16 @@ public class PersonBean implements Serializable {
     public void setCurrentPerson(Person currentPerson) {
         this.currentPerson = currentPerson;
     }
+
+    public Movie getMovieToAdd() {
+        return movieToAdd;
+    }
+
+    public void setMovieToAdd(Movie movieToAdd) {
+        this.movieToAdd = movieToAdd;
+    }
+    
+    
 
     /**
      * Initialise la liste de personne enregistré Initialise la liste des films
@@ -130,6 +142,32 @@ public class PersonBean implements Serializable {
  
             services.removeMovieFromPerson(currentPerson, movie);
         } catch (NullParameterException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+        }
+        return "detailsPerson.xhtml?id=" + currentPerson.getId() + "&faces-redirect=true";
+    }
+    
+    /**
+     * Retourne la liste des films que la personne n'a pas encore vu.
+     * @return la liste contenant les films pas encore vu par cette personne.
+     */
+    public List<Movie> getMoviesViewable() {
+        List<Movie> moviesNotAdded = services.getMoviesList();
+        moviesNotAdded.removeAll(currentPerson.getMovies());
+        return moviesNotAdded;
+    }
+    
+    /**
+     * ajoute un film à la liste des films vus de la personne courante
+     *
+     * @return retourne la chaine de caractère définissant la navigation.
+     * 
+     */    
+    public String addMovie(){
+        try {
+
+            services.addMovieToPerson(currentPerson, movieToAdd);
+        } catch (NullParameterException | UniqueException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
         }
         return "detailsPerson.xhtml?id=" + currentPerson.getId() + "&faces-redirect=true";

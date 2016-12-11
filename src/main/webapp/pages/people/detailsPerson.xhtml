@@ -60,7 +60,27 @@ and open the template in the editor.
                         style="max-width: 30%" action="#{personBean.deleteMovie(movie)}"
                         />
                 </h:column>
-            </h:dataTable> 
+            </h:dataTable>
+            <h2>#{msgs['MovieToAdd']}</h2>
+            <h:panelGrid columns="2">
+                <h:column>
+                <!-- LOV contenant les films pouvant être ajouté -->
+                <h:selectOneMenu id="lovMovie" value="#{personBean.movieToAdd}" >
+
+                    <f:converter binding="#{movieLOVConverter}" />
+
+                    <f:selectItems value="#{personBean.moviesViewable}" 
+                                   var="moviePrint" 
+                                   itemLabel="#{moviePrint.name}" />
+
+                </h:selectOneMenu>
+                </h:column>
+                <h:column>
+                    <h:commandButton action="#{personBean.addMovie()}"
+                                     value="#{msgs['movieAdd']}"
+                        />
+                </h:column>
+            </h:panelGrid>
         </h:form>
         <!-- Retour à l'accueil-->
         <h:button id="cancel" value="#{msgs['home']}" outcome="/pages/index.xhtml"/> 
