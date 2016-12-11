@@ -95,5 +95,19 @@ public class MovieBean implements Serializable {
         }
         return "detailsMovie.xhtml?id=" + currentMovie.getId() + "&faces-redirect=true";
     }
+    
+    /**
+     * Renvoyer le libellé correspondant à la situation du formualaire
+     * 
+     * @return la chaine de caractère corespondant au titre du libellé.
+     * 
+     */
+    public String FormTitle() {
+        if (currentMovieID==-1) {
+            return  "Création Film";
+        } else {
+            return  "Editer Film";
+        }
+    }
 
 }

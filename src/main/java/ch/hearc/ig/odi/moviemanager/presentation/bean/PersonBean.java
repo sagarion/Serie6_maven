@@ -173,4 +173,17 @@ public class PersonBean implements Serializable {
         return "detailsPerson.xhtml?id=" + currentPerson.getId() + "&faces-redirect=true";
     }
 
+    /**
+     * Renvoyer le libellé correspondant à la situation du formualaire
+     * 
+     * @return la chaine de caractère corespondant au titre du libellé.
+     * 
+     */
+    public String FormTitle() {
+        if (currentPersonID == -1) {
+            return  "Création Personne";
+        } else {
+            return  "Editer Personne";
+        }
+    }
 }
