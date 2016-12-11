@@ -7,6 +7,7 @@ package ch.hearc.ig.odi.moviemanager.presentation.bean;
 
 import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
+import ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException;
 import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
 import ch.hearc.ig.odi.moviemanager.services.Services;
 import java.io.Serializable;
@@ -109,6 +110,25 @@ public class PersonBean implements Serializable {
         try {
  
             services.savePerson(currentPerson);
+        } catch (NullParameterException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+        }
+        return "detailsPerson.xhtml?id=" + currentPerson.getId() + "&faces-redirect=true";
+    }
+    
+    /**
+     * Supprime le film placé en paramètre de la personne Courante. 
+     *
+     * @param movie le film a supprimé de la liste de film de la personne courante.
+     * @return retourne la chaine de caractère définissant la navigation.
+     * 
+     * @throws ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException
+     * pas gêrer car ne devrait jamais exister.
+     */    
+    public String deleteMovie(Movie movie) throws  InvalidParameterException{
+        try {
+ 
+            services.removeMovieFromPerson(currentPerson, movie);
         } catch (NullParameterException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
         }

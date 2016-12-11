@@ -31,30 +31,37 @@ and open the template in the editor.
             <h:outputText value="#{personBean.currentPerson.lastName}"/>          
         </h:panelGrid>
 
-        <!-- Eidtion de la Personne selectionnée -->
-        <h:button id="cancel" value="#{msgs['edit']}" outcome="form.xhtml"> 
+        <!-- Edition de la Personne selectionnée -->
+        <h:button id="edit" value="#{msgs['edit']}" outcome="form.xhtml"> 
             <f:param name="id" value="#{personBean.currentPerson.id.toString()}"/>
         </h:button> 
 
         <h2>#{msgs['moviesList']}</h2>
-        <!-- Affichage des films de la personne selectionnée-->
-        <h:dataTable value="#{personBean.movies}" var="movie" border="1">
-            <h:column>
-                <f:facet name="header">#{msgs['movieId']}</f:facet>
-                <h:link outcome="/pages/movies/detailsMovie.xhtml" value="#{movie.id.toString()}">
-                    <f:param name="id" value="#{movie.id.toString()}"/>
-                </h:link>
-            </h:column>            
-            <h:column>
-                <f:facet name="header">#{msgs['movieName']}</f:facet>
-                    #{movie.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">#{msgs['movieProducer']}</f:facet>
-                    #{movie.producer}
-            </h:column>
-        </h:dataTable> 
-
+        <h:form>
+            <!-- Affichage des films de la personne selectionnée-->
+            <h:dataTable value="#{personBean.movies}" var="movie" border="1">
+                <h:column>
+                    <f:facet name="header">#{msgs['movieId']}</f:facet>
+                    <h:link outcome="/pages/movies/detailsMovie.xhtml" value="#{movie.id.toString()}">
+                        <f:param name="id" value="#{movie.id.toString()}"/>
+                    </h:link>
+                </h:column>            
+                <h:column>
+                    <f:facet name="header">#{msgs['movieName']}</f:facet>
+                        #{movie.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs['movieProducer']}</f:facet>
+                        #{movie.producer}
+                </h:column>
+                <h:column>
+                    <h:commandButton 
+                        image="http://icdn.pro/images/fr/f/e/fermer-croix-supprimer-erreurs-sortie-icone-4368-128.png"
+                        style="max-width: 30%" action="#{personBean.deleteMovie(movie)}"
+                        />
+                </h:column>
+            </h:dataTable> 
+        </h:form>
         <!-- Retour à l'accueil-->
         <h:button id="cancel" value="#{msgs['home']}" outcome="/pages/index.xhtml"/> 
     </h:body>
