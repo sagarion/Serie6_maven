@@ -23,7 +23,7 @@ and open the template in the editor.
         <h:dataTable value="#{personBean.people}" var="person" border="1">
             <h:column>
                 <f:facet name="header">#{msgs['personId']}</f:facet>
-                <h:link outcome="people/moviesList.xhtml" value="#{person.id.toString()}">
+                <h:link outcome="people/detailsPerson.xhtml" value="#{person.id.toString()}">
                     <f:param name="id" value="#{person.id.toString()}"/>
                 </h:link>
             </h:column>            

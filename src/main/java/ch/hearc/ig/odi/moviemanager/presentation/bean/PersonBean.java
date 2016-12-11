@@ -7,10 +7,14 @@ package ch.hearc.ig.odi.moviemanager.presentation.bean;
 
 import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
+import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
 import ch.hearc.ig.odi.moviemanager.services.Services;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
@@ -22,26 +26,24 @@ import javax.inject.Named;
  * @author thibault.daucourt
  */
 @Named("personBean")
-@RequestScoped
-public class PersonBean implements Serializable{
-    
+@ViewScoped
+public class PersonBean implements Serializable {
+
     @Inject
     Services services;
-    
+
     List<Person> people;
     private Person currentPerson;
     private long currentPersonID;
-    
+
     List<Movie> movies;
-    
-    
-    
+
     /**
      * Creates a new instance of PersonBean
      */
     public PersonBean() {
     }
-    
+
     public List<Person> getPeople() {
         return people;
     }
@@ -65,23 +67,19 @@ public class PersonBean implements Serializable{
     public void setCurrentPerson(Person currentPerson) {
         this.currentPerson = currentPerson;
     }
-    
-    
-    
-    
+
     /**
-     * Initialise la liste de personne enregistré
-     * Initialise la liste des films enregistré
+     * Initialise la liste de personne enregistré Initialise la liste des films
+     * enregistré
      */
     public void initList() {
         this.people = services.getPeopleList();
         this.movies = services.getMoviesList();
     }
-    
+
     /**
-     * Récupère la personne correspondant au paramètre id de la requette.
-     * Place la valeur -1 dans l'attribut currentPrsonID si en mode nouvelle
-     * personne.
+     * Récupère la personne correspondant au paramètre id de la requette. Place
+     * la valeur -1 dans l'attribut currentPrsonID si en mode nouvelle personne.
      * Charge les films lié à cette personne.
      *
      */
@@ -94,11 +92,27 @@ public class PersonBean implements Serializable{
             currentPersonID = Integer.parseInt(idParam);
             currentPerson = services.getPersonWithId(currentPersonID);
             movies = currentPerson.getMovies();
-        }else {
+        } else {
             currentPerson = new Person();
             currentPersonID = -1;
         }
     }
-    
-    
+
+    /**
+     * Récupère les information saisie par l'utilisateur et agis en fonction. Si
+     * l'identifiant existe fait une mise à jour. Si l'identifiant n'existe pas,
+     * ajoute la nouvelle personne.
+     *
+     * @return retourne la chaine de caractère définissant la navigation
+     */
+    public String sauver() {
+        try {
+ 
+            services.savePerson(currentPerson);
+        } catch (NullParameterException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+        }
+        return "detailsPerson.xhtml?id=" + currentPerson.getId() + "&faces-redirect=true";
+    }
+
 }
