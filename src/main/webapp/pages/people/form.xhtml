@@ -20,6 +20,7 @@ and open the template in the editor.
     <h:body>
         <h1>#{msgs['personInfos']}</h1>
         <h:form >
+            <!-- formulaire de gestion d'une personne -->
             <h:panelGrid columns="2">
                 <h:panelGroup id="idOut">
                     <h:panelGroup rendered="#{personBean.currentPersonID != -1}">
@@ -36,8 +37,11 @@ and open the template in the editor.
                     <h:outputLabel value="#{msgs['personLastName']}" for="lastName"/>
                     <h:inputText value="#{personBean.currentPerson.lastName}"/>
 
-                    <h:commandButton id="reset" value="#{msgs['reset']}" type="reset" />                    
-                    <h:button id="cancel" value="#{msgs['cancel']}" outcome="/pages/index.xhtml" />  
+                    <h:commandButton id="reset" value="#{msgs['reset']}" type="reset" />  
+                    
+                    <!-- annulation et retour à la page d'accueil-->
+                    <h:button id="cancel" value="#{msgs['cancel']}" outcome="/pages/index.xhtml" />
+                    <!-- sauvegarde les données et renvoie à la page de détails de la personne sauvegrdée-->
                     <h:commandButton action="#{personBean.sauver()}" value="#{msgs['validate']}" />
             </h:panelGrid>
         </h:form>

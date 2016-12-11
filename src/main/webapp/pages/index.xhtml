@@ -8,21 +8,23 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <h:head>
         <title>#{msgs['movieManagerTitle']}</title>
     </h:head>
-    
+
     <f:metadata>
         <f:viewAction action="#{personBean.initList()}"></f:viewAction>
     </f:metadata>
-    
+
     <h:body>
         <h1>#{msgs['movieManagerTitle']}</h1>
         <h2>#{msgs['peopleList']}</h2>
+        <!-- afichage des personnes enregistrées-->
         <h:dataTable value="#{personBean.people}" var="person" border="1">
             <h:column>
                 <f:facet name="header">#{msgs['personId']}</f:facet>
+                <!-- renvoie vers la page de détails de la personne selectionnée-->
                 <h:link outcome="people/detailsPerson.xhtml" value="#{person.id.toString()}">
                     <f:param name="id" value="#{person.id.toString()}"/>
                 </h:link>
@@ -36,13 +38,15 @@ and open the template in the editor.
                     #{person.lastName}
             </h:column>
         </h:dataTable>
+        <!-- renvoie vers la page de formulaire ppur ajouter une personne -->
         <h:button id="addPerson" value="Ajouter" outcome="/pages/people/form.xhtml"/>
-        
+
         <h2>#{msgs['moviesList']}</h2>
+        <!-- Liste des films enregistrés -->
         <h:dataTable value="#{personBean.movies}" var="movie" border="1">
             <h:column>
                 <f:facet name="header">#{msgs['movieId']}</f:facet>
-                #{movie.id.toString()}
+                    #{movie.id.toString()}
             </h:column>            
             <h:column>
                 <f:facet name="header">#{msgs['movieName']}</f:facet>
