@@ -30,7 +30,7 @@ and open the template in the editor.
                 <h:outputText value="#{personBean.currentPerson.lastName}"/>          
             </h:panelGrid>
 
-            <h:link outcome="info.xhtml" value="#{msgs['edit']}">
+            <h:link outcome="form.xhtml" value="#{msgs['edit']}">
                 <f:param name="id" value="#{personBean.currentPerson.id.toString()}"/>
             </h:link>
             <h:button id="cancel" value="#{msgs['cancel']}" outcome="/pages/index.xhtml"/> 

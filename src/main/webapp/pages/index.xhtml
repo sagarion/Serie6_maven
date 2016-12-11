@@ -36,7 +36,7 @@ and open the template in the editor.
                     #{person.lastName}
             </h:column>
         </h:dataTable>
-        <!--<h:button id="addPerson" value="Ajouter" outcome="/pages/people/moviesList.xhtml"/>-->
+        <h:button id="addPerson" value="Ajouter" outcome="/pages/people/form.xhtml"/>
         
         <h2>#{msgs['moviesList']}</h2>
         <h:dataTable value="#{personBean.movies}" var="movie" border="1">
