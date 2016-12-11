@@ -12,7 +12,7 @@ and open the template in the editor.
     <h:head>
         <title>#{msgs['movieManagerTitle']}</title>
     </h:head>
-    
+
     <f:metadata>
         <f:viewParam name="id" value="#{personBean.currentPersonID}"/>
         <f:viewAction action="#{personBean.initPerson}"></f:viewAction>
@@ -32,17 +32,17 @@ and open the template in the editor.
                         <h:inputText readonly="true" disabled="true" value="#{personBean.currentPerson.id}"/>
                     </h:panelGroup>
                 </h:panelGroup>
-                    <h:outputLabel value="#{msgs['personFirstName']}" for="firstName"/>
-                    <h:inputText id="firstName" value="#{personBean.currentPerson.firstName}"/>
-                    <h:outputLabel value="#{msgs['personLastName']}" for="lastName"/>
-                    <h:inputText value="#{personBean.currentPerson.lastName}"/>
+                <h:outputLabel value="#{msgs['personFirstName']}" for="firstName"/>
+                <h:inputText id="firstName" value="#{personBean.currentPerson.firstName}"/>
+                <h:outputLabel value="#{msgs['personLastName']}" for="lastName"/>
+                <h:inputText value="#{personBean.currentPerson.lastName}"/>
 
-                    <h:commandButton id="reset" value="#{msgs['reset']}" type="reset" />  
-                    
-                    <!-- annulation et retour à la page d'accueil-->
-                    <h:button id="cancel" value="#{msgs['cancel']}" outcome="/pages/index.xhtml" />
-                    <!-- sauvegarde les données et renvoie à la page de détails de la personne sauvegrdée-->
-                    <h:commandButton action="#{personBean.sauver()}" value="#{msgs['validate']}" />
+                <h:commandButton id="reset" value="#{msgs['reset']}" type="reset" />  
+
+                <!-- annulation et retour à la page d'accueil-->
+                <h:button id="cancel" value="#{msgs['cancel']}" outcome="/pages/index.xhtml" />
+                <!-- sauvegarde les données et renvoie à la page de détails de la personne sauvegrdée-->
+                <h:commandButton action="#{personBean.sauver()}" value="#{msgs['validate']}" />
             </h:panelGrid>
         </h:form>
     </h:body>

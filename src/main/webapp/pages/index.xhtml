@@ -46,7 +46,10 @@ and open the template in the editor.
         <h:dataTable value="#{personBean.movies}" var="movie" border="1">
             <h:column>
                 <f:facet name="header">#{msgs['movieId']}</f:facet>
-                    #{movie.id.toString()}
+                <!-- renvoie vers la page de détails du film selectionné-->
+                <h:link outcome="movies/detailsMovie.xhtml" value="#{movie.id.toString()}">
+                    <f:param name="id" value="#{movie.id.toString()}"/>
+                </h:link>
             </h:column>            
             <h:column>
                 <f:facet name="header">#{msgs['movieName']}</f:facet>

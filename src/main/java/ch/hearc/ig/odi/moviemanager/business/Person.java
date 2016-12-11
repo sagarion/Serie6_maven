@@ -41,7 +41,7 @@ public class Person {
 
     /**
      * Constructeur vide pour la classe Person. Obligatoire. Représente
-     * un personne qui regarde des films, on initialise la collection qui
+     * une personne qui regarde des films, on initialise la collection qui
      * contiendra les films vu par cette personne
      *
      */

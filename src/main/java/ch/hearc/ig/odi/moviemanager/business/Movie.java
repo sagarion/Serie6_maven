@@ -22,7 +22,7 @@ public class Movie {
     private String producer;
     
     private HashMap<Long,Person> people;
-
+    
     
     /**
      * Constructeur paramétré pour la classe Movie. Obligatoire. Représente
@@ -37,6 +37,17 @@ public class Movie {
         this.id = id;
         this.name = name;
         this.producer = producer;
+        this.people = new HashMap<Long,Person>();
+    }
+    
+    
+    /**
+     * Constructeur vide pour la classe Movie. Obligatoire. Représente
+     * un film qui est regardé par des personnes, on initialise la collection qui
+     * contiendra les personnes qui ont vu ce film
+     *
+     */
+    public Movie() {
         this.people = new HashMap<Long,Person>();
     }
 
@@ -64,8 +75,8 @@ public class Movie {
         this.producer = producer;
     }
     
-    public ArrayList<Map.Entry<Long, Person>> getPeople() {
-        return new ArrayList<>(people.entrySet());
+    public ArrayList<Person> getPeople() {
+        return new ArrayList<>(people.values());
     }
     
     /**

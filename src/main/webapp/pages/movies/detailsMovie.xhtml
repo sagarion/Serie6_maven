@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>#{msgs['movieManagerTitle']}</title>
+    </h:head>
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{movieBean.currentMovieID}"/>
+        <f:viewAction action="#{movieBean.initMovie}"></f:viewAction>
+    </f:metadata>
+    <h:body>
+        <h1>#{msgs['movieManagerTitle']}</h1>
+
+        <h2>#{msgs['movieDetails']}</h2>
+        <!-- Affichage de information de la personne selectionnée-->
+        <h:panelGrid columns="2">
+            <h:outputLabel value="#{msgs['movieId']}" for="id"/>
+            <h:outputText id="id"  value="#{movieBean.currentMovie.id}"/>
+            <h:outputLabel value="#{msgs['movieName']}" for="movieName"/>
+            <h:outputText id="movieName" value="#{movieBean.currentMovie.name}"/>
+            <h:outputLabel value="#{msgs['movieProducer']}" for="movieProducer"/>
+            <h:outputText id="movieProducer" value="#{movieBean.currentMovie.producer}"/>          
+        </h:panelGrid>
+
+        <!-- Eidtion de la Personne selectionnée -->
+        <!--<h:button id="cancel" value="#{msgs['edit']}" outcome="form.xhtml"> 
+            <f:param name="id" value="#{personBean.currentPerson.id.toString()}"/>
+        </h:button>-->
+        
+        <h2>#{msgs['moviePeopleList']}</h2>
+        
+        <h:dataTable value="#{movieBean.people}" var="person" >
+            <h:column>
+                <f:facet name="header">#{msgs['personId']}</f:facet>
+                <!-- renvoie vers la page de détails de la personne selectionnée-->
+                <h:link outcome="/pages/people/detailsPerson.xhtml" value="#{person.id.toString()}">
+                    <f:param name="id" value="#{person.id.toString()}"/>
+                </h:link>
+            </h:column>            
+            <h:column>
+                <f:facet name="header">#{msgs['personFirstName']}</f:facet>
+                    #{person.firstName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">#{msgs['personLastName']}</f:facet>
+                    #{person.lastName}
+            </h:column>
+        </h:dataTable>
+        
+        <!-- Retour à l'accueil-->
+        <h:button id="cancel" value="#{msgs['home']}" outcome="/pages/index.xhtml"/> 
+    </h:body>
+</html>
