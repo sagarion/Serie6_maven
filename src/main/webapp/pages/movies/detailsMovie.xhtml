@@ -31,10 +31,10 @@ and open the template in the editor.
             <h:outputText id="movieProducer" value="#{movieBean.currentMovie.producer}"/>          
         </h:panelGrid>
 
-        <!-- Eidtion de la Personne selectionnée -->
-        <!--<h:button id="cancel" value="#{msgs['edit']}" outcome="form.xhtml"> 
-            <f:param name="id" value="#{personBean.currentPerson.id.toString()}"/>
-        </h:button>-->
+        <!-- Edition du film selectionné -->
+        <h:button id="cancel" value="#{msgs['edit']}" outcome="formMovie.xhtml"> 
+            <f:param name="id" value="#{movieBean.currentMovie.id.toString()}"/>
+        </h:button>
         
         <h2>#{msgs['moviePeopleList']}</h2>
         

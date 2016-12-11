@@ -38,7 +38,7 @@ and open the template in the editor.
                     #{person.lastName}
             </h:column>
         </h:dataTable>
-        <!-- renvoie vers la page de formulaire ppur ajouter une personne -->
+        <!-- renvoie vers la page de formulaire pour ajouter une personne -->
         <h:button id="addPerson" value="Ajouter" outcome="/pages/people/form.xhtml"/>
 
         <h2>#{msgs['moviesList']}</h2>
@@ -60,5 +60,7 @@ and open the template in the editor.
                     #{movie.producer}
             </h:column>
         </h:dataTable> 
+        <!-- renvoie vers la page de formulaire pour ajouter un film -->
+        <h:button id="addMovie" value="Ajouter" outcome="/pages/movies/formMovie.xhtml"/>
     </h:body>
 </html>

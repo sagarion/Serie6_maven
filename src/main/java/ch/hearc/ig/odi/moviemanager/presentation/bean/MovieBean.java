@@ -7,9 +7,11 @@ package ch.hearc.ig.odi.moviemanager.presentation.bean;
 
 import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
+import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
 import ch.hearc.ig.odi.moviemanager.services.Services;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -57,9 +59,9 @@ public class MovieBean implements Serializable {
     }
     
     /**
-     * Récupère la personne correspondant au paramètre id de la requette. Place
-     * la valeur -1 dans l'attribut currentPrsonID si en mode nouvelle personne.
-     * Charge les films lié à cette personne.
+     * Récupère le film correspondant au paramètre id de la requette. Place
+     * la valeur -1 dans l'attribut currentMovieID si en mode nouveau film.
+     * Charge les personnes lié à ce film.
      *
      */
     public void initMovie() {
@@ -75,6 +77,23 @@ public class MovieBean implements Serializable {
             currentMovie = new Movie();
             currentMovieID = -1;
         }
+    }
+    
+    /**
+     * Récupère les information saisie par l'utilisateur et agis en fonction. Si
+     * l'identifiant existe fait une mise à jour. Si l'identifiant n'existe pas,
+     * ajoute la nouvelle personne.
+     *
+     * @return retourne la chaine de caractère définissant la navigation
+     */
+    public String sauver() {
+        try {
+ 
+            services.saveMovie(currentMovie);
+        } catch (NullParameterException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ex.getMessage()));
+        }
+        return "detailsMovie.xhtml?id=" + currentMovie.getId() + "&faces-redirect=true";
     }
 
 }
