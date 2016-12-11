@@ -62,23 +62,26 @@ and open the template in the editor.
                 </h:column>
             </h:dataTable>
             <h2>#{msgs['MovieToAdd']}</h2>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="3">
                 <h:column>
-                <!-- LOV contenant les films pouvant être ajouté -->
-                <h:selectOneMenu id="lovMovie" value="#{personBean.movieToAdd}" >
+                    #{msgs['movieAddLibelle']}
+                </h:column>
+                <h:column>
+                    <!-- LOV contenant les films pouvant être ajouté -->
+                    <h:selectOneMenu id="lovMovie" value="#{personBean.movieToAdd}" >
 
-                    <f:converter binding="#{movieLOVConverter}" />
+                        <f:converter binding="#{movieLOVConverter}" />
 
-                    <f:selectItems value="#{personBean.moviesViewable}" 
-                                   var="moviePrint" 
-                                   itemLabel="#{moviePrint.name}" />
+                        <f:selectItems value="#{personBean.moviesViewable}" 
+                                       var="moviePrint" 
+                                       itemLabel="#{moviePrint.name}" />
 
-                </h:selectOneMenu>
+                    </h:selectOneMenu>
                 </h:column>
                 <h:column>
                     <h:commandButton action="#{personBean.addMovie()}"
                                      value="#{msgs['movieAdd']}"
-                        />
+                                     />
                 </h:column>
             </h:panelGrid>
         </h:form>
